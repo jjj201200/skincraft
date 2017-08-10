@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+let path = require('path');
+let webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -13,7 +13,9 @@ module.exports = {
     publicPath: '/src/',
     filename: 'bundle.js'
   },
-  devServer: { inline: true },
+  devServer: {
+    inline: true
+  },
   module: {
     // preLoaders: [
     //   {
@@ -37,13 +39,16 @@ module.exports = {
         test: /\.(css)$/,
         loader: 'style-loader!css-loader'
       }, {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader?limit=8192'
+      }, {
+        test: /\.html$/,
+        loader: 'html-loader'
       }
     ]
   },
   plugins: [
     // new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.js'),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

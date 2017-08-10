@@ -1,0 +1,46 @@
+{
+  "name": "skincrafy",
+  "version": "1.0.0",
+  "description": "A skin edtior for minecraft width electron & react",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "babel": "babel",
+    "webpack": "webpack",
+    "server": "node ./server.js"
+  },
+  "repository": "https://github.com/jjj201200/skincraft",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "ruo",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "electron": "~1.6.2",
+    "electron-packager": "^8.7.2",
+    "jsxhint-loader": "^0.2.0",
+    "less-loader": "^4.0.5",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "redux-devtools": "^3.4.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.1",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6"
+  }
+}

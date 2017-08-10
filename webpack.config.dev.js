@@ -4,8 +4,8 @@ let node_modules_dir = path.join(__dirname, 'node_modules');
 let deps = [
   'react/dist/react.min.js',
   'react-router/dist/react-router.min.js',
-  'moment/min/moment.min.js',
-  'underscore/underscore-min.js',
+  // 'moment/min/moment.min.js',
+  // 'underscore/underscore-min.js',
 ];
 
 let config = {

@@ -18,7 +18,7 @@ let config = {
   output: {
     path: path.resolve(__dirname, 'src'),
     publicPath: '/src/',
-    filename: 'bundle.[hash].js'
+    filename: 'bundle.js'
   },
   devServer: {
     inline: true

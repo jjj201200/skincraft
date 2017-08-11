@@ -12,13 +12,12 @@
   "repository": "https://github.com/jjj201200/skincraft",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "react",
+    "webpack",
+    "redux"
   ],
   "author": "ruo",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -43,10 +42,16 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "^17.1.0",
+    "dat.gui": "^0.6.1",
+    "jquery": "^3.2.1",
     "less": "^2.7.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "stats.js": "^0.17.0",
+    "three": "^0.86.0",
+    "three-orbitcontrols": "^1.2.1"
   }
 }

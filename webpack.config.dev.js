@@ -18,13 +18,19 @@ let config = {
   output: {
     path: path.resolve(__dirname, 'src'),
     publicPath: '/src/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devServer: {
-    inline: true
+    inline: true,
+    contentBase: path.resolve(__dirname, 'src'),
+    noInfo: true,
   },
   resolve: {
-    alias: {}
+    alias: {},
+    modules: [
+      "node_modules",
+    ],
+    extensions: [".js", ".json", ".jsx", ".css", ".scss"],
   },
   module: {
     noParse: [],

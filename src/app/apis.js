@@ -1,2 +1,2 @@
 // export * from '../libs';
-export { Renderer } from '../core';
+export * from '../core';

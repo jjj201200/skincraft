@@ -47,7 +47,7 @@ let config = {
         loader: 'style-loader!css-loader!less-loader!sass-loader'
       }, {
         test: /\.(png|jpg|gif|svg|woff)$/,
-        loader: 'file-loader?limit=8192'
+        loader: 'url-loader?limit=30000&name=[name].[ext]'
       }, {
         test: /\.html$/,
         loader: 'html-loader'

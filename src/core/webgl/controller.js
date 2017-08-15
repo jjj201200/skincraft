@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-13 14:21:02 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-13 14:50:50
+ * @Last Modified time: 2017-08-15 15:58:43
  */
 
 import {
@@ -16,7 +16,7 @@ import {
     Raycaster
 } from 'three';
 let OrbitControls = require('three-orbitcontrols');
-import { TWEEN } from '@tweenjs/tween.js';
+import { Tween } from 'es6-tween';
 
 export class Controller {
     constructor(renderer, camera, scene) {

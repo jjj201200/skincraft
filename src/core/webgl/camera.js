@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-13 14:22:06 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-13 14:32:06
+ * @Last Modified time: 2017-08-15 17:02:25
  */
 import {
     THREE,
@@ -13,7 +13,6 @@ import {
     PerspectiveCamera,
     Vector3,
 } from 'three';
-import { TWEEN } from '@tweenjs/tween.js';
 
 export class Camera {
     constructor(canvasWidth, canvasHeight) {

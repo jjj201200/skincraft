@@ -1,2 +1,10 @@
-export { Renderer } from './webgl/renderer';
-export { Steve } from './modules/steve';
+export {
+    Renderer,
+    Model,
+    Camera,
+    Controller,
+    Part,
+    Cube,
+    Face
+} from './webgl';
+export { Steve } from './models';

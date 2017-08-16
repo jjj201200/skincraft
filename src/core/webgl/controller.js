@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-13 14:21:02 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 15:58:43
+ * @Last Modified time: 2017-08-16 14:52:42
  */
 
 import {
@@ -15,16 +15,18 @@ import {
     Vector3,
     Raycaster
 } from 'three';
+import  $  from 'jquery';
 let OrbitControls = require('three-orbitcontrols');
 import { Tween } from 'es6-tween';
 
 export class Controller {
     constructor(renderer, camera, scene) {
+        let _this = this;
         this.renderer = renderer;
         this.camera = camera;
         this.scene = scene;
-        this.domElement = renderer.canvasDom;
-        this.controller = new OrbitControls(this.camera, this.domElement);
+        this.domElement = $(renderer.domElement);
+        this.controller = new OrbitControls(this.camera, this.domElement[0]);
         this.controller.target = new Vector3(0, 0, 0);
         this.controller.zoomSpeed = Math.sqrt(renderer.state.scale);
         this.controller.userPanSpeed = 0;
@@ -36,12 +38,12 @@ export class Controller {
         this.controller.mouseButtons.PAN = 1;
         this.controller.mouseButtons.ZOOM = 2;
         this.controller.mouseButtons.ORBIT = 2;
-        this.controller.addEventListener('change', function (renderer, scene, camera) {
-            renderer.render(scene, camera);
+        this.controller.addEventListener('change', function () {
+            _this.renderer.renderer.render(_this.scene, _this.camera);
         });
         renderer.raycaster = new Raycaster();
         renderer.objects = [];
-
+        this.initEvent();
         return this.controller;
     }
     initEvent() {
@@ -52,8 +54,9 @@ export class Controller {
         let target;
         this.domElement.on('mousemove', function (e) {
             e.preventDefault();
-            renderer.state.mouse.x = (e.clientX / _this.domElement.innerWidth()) * 2 - 1;
-            renderer.state.mouse.y = -(e.clientY / _this.domElement.innerHeight()) * 2 + 1;
+            console.log(_this.renderer.state)
+            _this.renderer.state.mouse.x = (e.clientX / _this.domElement.innerWidth()) * 2 - 1;
+            _this.renderer.state.mouse.y = -(e.clientY / _this.domElement.innerHeight()) * 2 + 1;
 
         }).on('mousedown', function (e) {
             e.preventDefault();

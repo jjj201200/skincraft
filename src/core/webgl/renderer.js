@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-11 15:25:54 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 17:25:02
+ * @Last Modified time: 2017-08-16 14:57:44
  */
 import $ from 'jquery';
 import {
@@ -13,7 +13,10 @@ import {
 	Scene,
 	PerspectiveCamera,
 	Vector3,
-	Vector2
+	Vector2,
+	BoxGeometry,
+	MeshBasicMaterial,
+	Mesh
 } from 'three';
 import { Tween } from 'es6-tween';
 
@@ -24,12 +27,17 @@ export class Renderer {
 	// set renderer(n){
 	// 	this.renderer  = n;
 	// }
-	constructor({ canvasD2DOM, canvasD3DOM }) {
-		// this.canvasD2DOM = canvasD2DOM;
-		this.canvasD3DOM = canvasD3DOM;
-		this.canvasD3Width = $(this.canvasD3DOM).innerWidth();
-		this.canvasD3Height = $(this.canvasD3DOM).innerHeight();
-		
+	constructor({ DOM,canvasD2DOM }) {
+		this.dom = DOM;
+		this.canvasD2DOM = canvasD2DOM;
+		// this.canvasD3DOM = canvasD3DOM;
+		this.canvasD2Width = $(this.canvasD2DOM).innerWidth();
+		this.canvasD2Height = $(this.canvasD2DOM).innerHeight();
+		this.canvasD3Width = 1000;
+		this.canvasD3Height = 600;
+
+		// this.canvasD2DOM.
+
 		this.state = {
 			editorSize: 100,
 			inited: false,
@@ -37,6 +45,7 @@ export class Renderer {
 			mouse: new Vector2(0, 0), //z=-1 important!
 			able: false
 		};
+		this.initRenderer();
 	}
 	webglAvailable() {
 		return (window.requestAnimFrame = (function() {
@@ -64,7 +73,6 @@ export class Renderer {
 		};
 	}
 	clearCanvas() {
-		
 		this.context2D.clearRect(
 			0,
 			0,
@@ -73,19 +81,20 @@ export class Renderer {
 		);
 		return this;
 	}
-	loadModel(model,dom) {
+	loadModel(model) {
+		// this.dom = dom;
 		this.model = model;
 		this.model.renderer = this;
-		this.initRenderer();
 		this.init2DCanvas(this.model);
 		this.addModel(this.model);
-		this.renderer.setSize(this.model.skin.width, this.model.skin.height);
-		$(dom).append(this.renderer.domElement);
 		this.drawSkin();
+		// this.renderer.setSize(this.model.skin.width, this.model.skin.height);
+		// $(dom).append(this.renderer.domElement);
+		
+		// this.scene.add( cube );
 	}
 	init2DCanvas(model) {
 		// console.log(this.canvasD2DOM)
-		this.canvasD2DOM = this.renderer.domElement;
 		this.canvasD2DOM.width = this.model.mapSize[this.model.versionIndex][0];
 		this.canvasD2DOM.height = this.model.mapSize[
 			this.model.versionIndex
@@ -103,33 +112,24 @@ export class Renderer {
 			: new CanvasRenderer();
 		this.renderer.shadowMap.enabled = true;
 		this.renderer.setSize(this.canvasD3Width, this.canvasD3Height);
-		this.backgroundColor = '#252525';
+		this.backgroundColor = '#eeeeee';
 		this.renderer.setClearColor(this.backgroundColor, 1);
 		this.camera = new Camera(this.canvasD3Width, this.canvasD3Height);
-
-/* 		this.camera = new PerspectiveCamera(45, this.canvasD3Width / this.canvasD3Height, 0.1, 10000);
-		this.camera.animation = {};
-		this.camera.animation.speed = 300;
-		this.camera.animation.moved = false;
-		this.camera.animation.positionMoved = false;
-		this.camera.animation.targetMoved = false;
-		this.camera.animation.zoomMoved = false;
-		this.camera.animation.target = new Vector3(0, 0, 0); */
-
+		this.camera.position.z = 20;
+		$(this.dom).append(this.renderer.domElement);
 		this.scene = new Scene();
-		/* this.Controller = new Controller(
-			this.renderer,
+		this.Controller = new Controller(
+			this,
 			this.camera,
 			this.scene
-		); */
+		);
 		let renderLoop = () => {
 			requestAnimationFrame(renderLoop);
 			// TWEEN.update();
 			this.render();
 		};
-		// renderLoop();
-		this.renderer.render(this.scene, this.camera);
-		this.initEvent();
+		// this.initEvent();
+		renderLoop();
 	}
 	render() {
 		this.renderer.render(this.scene, this.camera);
@@ -141,15 +141,15 @@ export class Renderer {
 		});
 	}
 	resetCamera() {
-        this.camera.position.x = 0;
-        this.camera.position.y = 0;
-        this.camera.position.z = this.editor.editorSize / 2;
-        this.camera.lookAt(this.camera.animation.target);
-        if (this.controls) this.controls.target = this.camera.animation.target;
-        return this;
+		this.camera.position.x = 0;
+		this.camera.position.y = 0;
+		this.camera.position.z = this.editor.editorSize / 2;
+		this.camera.lookAt(this.camera.animation.target);
+		if (this.controls) this.controls.target = this.camera.animation.target;
+		return this;
 	}
 	resizeCanvas() {
-		let [width, height] = [this.canvasD3DOM.innerWidth(), this.canvasD3DOM.innerHeight()];
+		let [width, height] = [this.canvasD3Width, this.canvasD3Height];
 		this.renderer.setSize(width, height);
 		this.camera.updateProjectionMatrix();
 		this.camera.aspect = width / height;
@@ -158,6 +158,7 @@ export class Renderer {
 	addModel(model) {
 		this.model = model;
 		this.scene.add(this.model.mesh);
+		console.log(this.scene);
 		// console.log(this.model.mesh.children, this.model.mesh.children.length)
 		this.camera.lookAt(this.model.focuseTarget);
 		// this.addChild(this.model.mesh.children);

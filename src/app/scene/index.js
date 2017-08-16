@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-10 21:23:38 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 17:16:02
+ * @Last Modified time: 2017-08-16 13:30:21
  */
 import React from 'react';
 import ReactDom from 'react-dom';
@@ -22,18 +22,19 @@ export default class Scene extends React.Component {
 			domElement: undefined
 		};
 		this.canvasD2DOM = this.refs.D2;
-		this.canvasD3DOM = this.refs.D3;
+		// this.canvasD3DOM = this.refs.D3;
 		this.renderer = new Renderer({
+			DOM:this.refs.scene,
 			canvasD2DOM: _this.canvasD2DOM,
-			canvasD3DOM: _this.canvasD3DOM
+			// canvasD3DOM: _this.canvasD3DOM
 		});
 		this.loadModel();
-		this.renderer.drawSkin();
+		// this.renderer.drawSkin();
 	}
 	loadModel() {
 		// let _this = this;
 		this.model = this.initModel(Steve);
-		this.renderer.loadModel(this.model,this.refs.scene);
+		this.renderer.loadModel(this.model);
 		// console.log(this.model);
 		// this.init2DCanvas(this.model)
 		// _this.renderer.addModel(_this.model);
@@ -59,7 +60,7 @@ export default class Scene extends React.Component {
 	render() {
 		return (
 			<div className="scene" ref="scene">
-				<canvas className="D3" ref="D3" />
+				
 				<canvas className="D2" ref="D2" />
 			</div>
 		);

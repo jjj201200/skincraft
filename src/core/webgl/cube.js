@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 13:14:58 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 16:56:32
+ * @Last Modified time: 2017-08-16 15:27:46
  */
 import {
 	MeshBasicMaterial,
@@ -59,9 +59,7 @@ export class Cube {
 			this.boxSize.x,
 			this.boxSize.y,
 			this.boxSize.z,
-			this.textureSize.x,
-			this.textureSize.y,
-			this.textureSize.z
+			1,1,1
 		);
 		this.geometry.name = this.name + ' geometry';
 		let a = new MeshBasicMaterial({
@@ -70,26 +68,29 @@ export class Cube {
 			side: DoubleSide,
 			overdraw: 1,
 			fog: false,
-			wireframe: false,
+			wireframe: true,
 			transparent: true,
-			opacity: 1
+			opacity: 1,
+			visible: true,
 		});
 		let b = new MeshBasicMaterial({
 			visible: false,
 			transparent: true,
 			opacity: 0
 		});
-		this.material = [a, b];
-		this.material[0].opacity = this.opacity;
-		this.mesh = new Mesh(this.geometry, this.material);
-		this.mesh.name = this.name + ' cube_in';
-		this.mesh.cube = this;
-		this.mesh.position.set(
-			this.mesh.position.x - this.center.x,
-			this.mesh.position.y - this.center.y,
-			this.mesh.position.z - this.center.z
-		);
-		this.mesh = new Object3D().add(this.mesh);
+		// var a = new MeshBasicMaterial( {color: 0xff0000} );
+
+		this.material = new Array(a, b);
+		// this.material[0].opacity = this.opacity;
+		// this.mesh_in = new Mesh(this.geometry, this.material );
+		// this.mesh_in.name = this.name + ' cube_in';
+		// this.mesh_in.cube = this;
+		// this.mesh_in.position.set(
+		// 	this.mesh_in.position.x - this.center.x,
+		// 	this.mesh_in.position.y - this.center.y,
+		// 	this.mesh_in.position.z - this.center.z
+		// );
+		this.mesh = new Mesh(this.geometry, this.material );
 		this.mesh.name = this.name + ' cube';
 	}
 	
@@ -108,9 +109,9 @@ export class Cube {
 			let colorCoordinate = FACE.getCoordinate(restFaceIndex);
 			let color = new Color(0);
 			let colorData = this.model.renderer.context2D.getImageData(colorCoordinate.x, colorCoordinate.y, 1, 1).data;
-			color.setRGB(colorData[0] / 255, colorData[1] / 255, colorData[2] / 255);
+			color.setRGB(1, 0, 0);
 			this.geometry.faces[faceIndex].color = color;
-			this.geometry.faces[faceIndex].materialIndex = colorData[3] < 255 ? 1 : 0;
+			this.geometry.faces[faceIndex].materialIndex =colorData[3] < 255 ? 1 : 0;
 			this.geometry.faces[faceIndex + 1].color = color;
 			this.geometry.faces[faceIndex + 1].materialIndex = colorData[3] < 255 ? 1 : 0;
 		}

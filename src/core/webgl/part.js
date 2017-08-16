@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 11:57:50 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 16:56:27
+ * @Last Modified time: 2017-08-16 15:08:06
  */
 import { THREE, Mesh, Vector3 } from 'three';
 import $ from 'jquery';

@@ -2,12 +2,14 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 11:14:12 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 16:58:51
+ * @Last Modified time: 2017-08-16 14:34:29
  */
 import {
     THREE,
     Mesh,
-    Vector3
+    Vector3,
+    MeshBasicMaterial,
+    BoxGeometry
 } from 'three';
 import $ from 'jquery';
 
@@ -52,7 +54,7 @@ export class Model {
         // this.init();
     }
     initMesh() {
-		this.mesh = new Mesh();
+        this.mesh = new Mesh();
 		// this.meshBox = new Mesh();
 	}
     update(/* original */) {

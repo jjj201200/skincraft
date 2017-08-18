@@ -42917,7 +42917,6 @@
 		this.setSize = function () {};
 
 	}
-
 	exports.WebGLRenderTargetCube = WebGLRenderTargetCube;
 	exports.WebGLRenderTarget = WebGLRenderTarget;
 	exports.WebGLRenderer = WebGLRenderer;

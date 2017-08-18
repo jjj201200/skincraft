@@ -2,10 +2,9 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-13 14:22:06 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-15 17:02:25
+ * @Last Modified time: 2017-08-18 13:06:28
  */
 import {
-    THREE,
     WebGLRenderer,
     CanvasRenderer,
     PCFSoftShadowMap,
@@ -15,10 +14,10 @@ import {
 } from 'three';
 
 export class Camera {
-    constructor(canvasWidth, canvasHeight) {
+    constructor(aspectRatio) {
         this.camera = new PerspectiveCamera(
             45,
-            canvasWidth / canvasHeight,
+            aspectRatio,
             0.1,
             10000
         );

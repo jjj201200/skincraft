@@ -1,10 +1,14 @@
 export {
-    Renderer,
+    RenderManager,
+    ModelManager,
+    TextureManager,
     Model,
+    Texture,
     Camera,
     Controller,
     Part,
     Cube,
-    Face
+    Face,
+    Materials,
 } from './webgl';
 export { Steve } from './models';

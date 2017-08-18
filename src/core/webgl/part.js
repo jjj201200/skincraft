@@ -2,9 +2,9 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 11:57:50 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-16 15:08:06
+ * @Last Modified time: 2017-08-18 13:17:22
  */
-import { THREE, Mesh, Vector3 } from 'three';
+import { THREE, Mesh, Vector3, BoxGeometry, MeshBasicMaterial } from 'three';
 import $ from 'jquery';
 
 import { Cube } from './cube';
@@ -67,11 +67,12 @@ export class Part {
 			}
 			this.mesh.add(this.meshBox);
 		} else {
-            for (var name in data) {
-                // this.cubes[name].setSkinLayers(this.skinLayers);
-                /* original ? this.cubes[name].reloadOriginalSkin() :  */this.cubes[name].draw();
-            }
-        }
+			for (var name in data) {
+				// this.cubes[name].setSkinLayers(this.skinLayers);
+				/* original ? this.cubes[name].reloadOriginalSkin() :  */
+				this.cubes[name].draw();
+			}
+		}
 
 		// return this;
 	}

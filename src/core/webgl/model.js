@@ -2,15 +2,14 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 11:14:12 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-16 14:34:29
+ * @Last Modified time: 2017-08-17 15:22:49
  */
 import {
-    THREE,
     Mesh,
     Vector3,
     MeshBasicMaterial,
     BoxGeometry
-} from 'three';
+} from '../apis';
 import $ from 'jquery';
 
 import { Part } from './part';
@@ -19,7 +18,7 @@ export class Model {
 	constructor(modelData,callback) {
         this.init(modelData);
         this.initMesh();
-        this.update();
+        // this.update();
         if (callback instanceof Function) callback(this);
     }
 	init(modelData) {

@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-11 15:25:54 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-18 16:35:04
+ * @Last Modified time: 2017-08-20 01:28:26
  */
 import $ from 'jquery';
 import {
@@ -51,7 +51,7 @@ export class RenderManager {
 	}
 	init() {
 		/* create renderer */
-		this.renderer3D = this.webglAvailable()
+		this.renderer3D = this.checkWebglAvailable()
 			? new WebGLRenderer({
 					alpha: true,
 					antialias: true,

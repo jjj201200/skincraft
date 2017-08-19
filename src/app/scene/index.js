@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-10 21:23:38 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-18 16:24:13
+ * @Last Modified time: 2017-08-20 02:06:39
  */
 import React from 'react';
 import ReactDom from 'react-dom';
@@ -14,11 +14,11 @@ import { RenderManager, TextureManager, ModelManager, Model, Steve } from '../ap
 
 export default class Scene extends React.Component {
 	componentDidMount() {
-		init();
 		this.defaultOption = {
 			modelName: 'steve',
 			textureName: 'steve'
 		};
+		this.init();
 	}
 	init() {
 		/* init scene size */
@@ -34,13 +34,18 @@ export default class Scene extends React.Component {
 		this.textureManager = new TextureManager();
 
 		/* run default options */
-		this.loadModel(this.defaultOption.modelName,this.defaultOption.textureName)
+		this.loadModel(this.defaultOption.modelName,this.defaultOption.textureName);
 	}
 	loadModel(modelName,textureName) {
-		this.modelManager.loadModel(modelName, this.renderManager.renderer).then(() => {
+		this.modelManager.loadModel(modelName, this.renderManager.renderer3D).then((result) => {
+			if(textureName === undefined){
+				textureName = modelName;
+			}
 			this.textureManager.loadTexture(textureName).then(() => {
-				this.modelManager.drawTexture(this.textureManager.currentTexture);
+				this.modelManager.drawTexture(this.textureManager.currentTexture,this.textureManager.context);
 			});
+		},(result)=>{
+			
 		});
 	}
 

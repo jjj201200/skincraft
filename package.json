@@ -5,9 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "babel": "babel",
     "webpack": "webpack",
-    "server": "node ./server.js"
+    "webpack_server": "node ./server.js",
+    "json_server": "json-server db.json"
   },
   "repository": "https://github.com/jjj201200/skincraft",
   "keywords": [
@@ -29,8 +29,10 @@
     "electron-packager": "^8.7.2",
     "es6-tween": "^3.1.0",
     "expose-loader": "^0.7.3",
+    "express": "^4.15.4",
     "file-loader": "^0.11.2",
     "html-loader": "^0.5.1",
+    "json-server": "^0.12.0",
     "jsxhint-loader": "^0.2.0",
     "less-loader": "^4.0.5",
     "node-sass": "^4.5.3",

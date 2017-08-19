@@ -1,3 +1,4 @@
+// const express = require('express');
 let path = require('path');
 let webpack = require('webpack');
 let node_modules_dir = path.join(__dirname, 'node_modules');
@@ -23,13 +24,24 @@ let config = {
 	devServer: {
 		inline: true,
 		contentBase: path.resolve(__dirname, 'src'),
-		noInfo: true
+		noInfo: true,
+		// setup(app) {
+		// 	app.use('/statics/models/*', express.static(path.join(__dirname, 'src', 'static', 'models')));
+		// 	app.use('/statics/textures/*', express.static(path.join(__dirname, 'src', 'static', 'textures')));
+		// },
+		// proxy: [
+		// 	{
+		// 		context: ['/models/**', '/textures/**'],
+		// 		target: 'http://127.0.0.1:3000/',
+		// 		secure: false
+		// 	}
+		// ]
 	},
 	resolve: {
 		alias: {
-			'three': 'three.js'
+			// 'three': 'three.js'
 		},
-		modules: ['node_modules',path.resolve(__dirname, "src/libs")],
+		modules: ['node_modules', path.resolve(__dirname, "src/libs")],
 		extensions: ['.js', '.json', '.jsx', '.css', '.scss']
 	},
 	module: {
@@ -71,7 +83,7 @@ let config = {
 		// }),
 	]
 };
-deps.forEach(function(dep) {
+deps.forEach(function (dep) {
 	var depPath = path.resolve(node_modules_dir, dep);
 	config.resolve.alias[dep.split(path.sep)[0]] = depPath;
 	config.module.noParse.push(depPath);

@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-18 12:36:22 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-18 16:16:51
+ * @Last Modified time: 2017-08-20 02:11:15
  */
 
 import $ from 'jquery';
@@ -18,6 +18,7 @@ export class ModelManager {
 		this.modelDataList = {};
 		this.modelObjects = {};
 		this.dtd = null;
+		this.preUrl = 'http://127.0.0.1:3000/';
 	}
 	getModelData(modelName) {
 		let _t = this;
@@ -25,16 +26,19 @@ export class ModelManager {
 			_t.dfd = $.Deferred();
 		}
 		let modelData = this.modelDataList[modelName];
-		if (model) {
+		if (modelData) {
 			return _t.dfd.resolve();
 		} else {
-			return $.get('model/', { modelName: modelName }).then(
-				modelData => {
-					_t.modelDataList[modelName] = modelData;
+			return $.get('/model/' + modelName).then(
+				(result) => {
+					_t.modelDataList[modelName] = result;
 					_t.dfd.resolve();
+					return modelData;
 				},
-				() => {
+				(result) => {
 					_t.dfd.reject(`Failed to get model ${modelName}.`);
+					console.error(`Failed to get model ${modelName}.`);
+					return result;
 				}
 			);
 		}
@@ -51,15 +55,17 @@ export class ModelManager {
 			return _t.dfd.resolve();
 		} else {
 			return _t.getModelData(modelName).then(
-				() => {
-					let modelData = _t.modelDataList[modelName];
-					let model = new Model(modelData);
+				(result) => {
+					let modelData = result;
+					let model = new Model(modelName, modelData);
 					_t.modelObjects[modelName] = model;
 					_t.currentModel = model;
 					_t.dfd.resolve();
+					return model;
 				},
-				() => {
-					_t.dfd.reject(`Failed to set model ${modelName}.`);
+				(result) => {
+					console.error(`Failed to set model ${modelName}.`);
+					return result;
 				}
 			);
 		}
@@ -72,11 +78,17 @@ export class ModelManager {
 	loadModel(modelName, renderer) {
 		let _t = this;
 		_t.dfd = $.Deferred();
-		return _t.setModel(modelName).then(() => {
+		return _t.setModel(modelName).then((result) => {
 			let modelObject = _t.modelObjects[modelName];
-			renderer.scene.add(model);
+			renderer.scene.add(model.mesh);
 			_t.dfd = null;
+			return true;
+		}, (result) => {
+			console.error(`Failed to load model ${modelName}.`);
+			return result;
 		});
 	}
-	drawTexture(textures) {}
+	drawTexture(textures, context) {
+
+	}
 }

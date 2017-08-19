@@ -1,0 +1,12 @@
+{
+    "textures": [
+        {
+            "id": 1,
+            "name": "steve",
+            "type": "steve",
+            "version": 0,
+            "imgUrl": "src/static/imgs/textures/steve.png",
+            "layers": {}
+        }
+    ]
+}

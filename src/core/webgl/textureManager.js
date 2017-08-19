@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-18 13:21:28 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-18 16:26:57
+ * @Last Modified time: 2017-08-20 01:06:05
  */
 
 import $ from 'jquery';
@@ -30,7 +30,7 @@ export class TextureManager {
 		if (texture) {
 			return _t.dfd.resolve();
 		} else {
-			return $.get('texture/', { textureName: textureName }).then(
+			return $.get('textures/', { textureName: textureName }).then(
 				textureData => {
 					_t.textureDataList[textureName] = textureData;
 					_t.dfd.resolve();
@@ -55,7 +55,7 @@ export class TextureManager {
 			return _t.getTextureData(textureName).then(
 				() => {
 					let textureData = _t.textureDataList[textureName];
-					let texture = new Texture(textureData);
+					let texture = new Texture(textureName, textureData);
 					_t.textureObjects[textureName] = texture;
 					_t.currentTexture = texture;
 					_t.dfd.resolve();

@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 13:14:58 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-18 13:06:22
+ * @Last Modified time: 2017-08-19 21:09:25
  */
 import {
 	THREE,
@@ -22,42 +22,39 @@ import { Materials } from './materials';
 import { Face } from './face';
 
 export class Cube {
-	constructor(cubeData) {
-		this.init(cubeData);
+	constructor(cubeName, cubeData) {
+		this.init(cubeName, cubeData);
 	}
-	init(cubeData) {
-		$.extend(this, cubeData.data);
-		this.part = cubeData.part;
-		this.model = cubeData.model;
-		this.name = cubeData.name;
-		this.center = this.part.center;
-		this.opacity = 1;
-		// console.log(this);
-		this.typeIndex = this.model.typeIndex || 0;
-		this.versionIndex = this.model.versionIndex || 0;
-
-		this.boxSize = new Vector3(
-			this.boxSize[0],
-			this.boxSize[1],
-			this.boxSize[2]
-		);
-		this.textureSize = new Vector3(
-			this.textureSize[0],
-			this.textureSize[1],
-			this.textureSize[2]
-		);
-		this.center = new Vector3(this.center.x, this.center.y, this.center.z);
+	init(cubeName, cubeData) {
+		this.name = cubeName;
+		this.boxSize = cubeData.boxSize;
+		this.textureSize = cubeData.textureSize;
+		this.texturePosition = cubeData.texturePosition;
+		this.position = cubeData.position;
+		this.center = cubeData.center;
+		this.visible = cubeData.visible;
 
 		this.initFACES();
-		this.initMesh();
+		this.create();
+		// this.initMesh();
+	}
+	create() {
+		let geometry = new BoxGeometry(
+			this.size.x,
+			this.size.y,
+			this.size.z,
+			this.textureSize.x,
+			this.textureSize.y,
+			this.textureSize.z
+		);
+		let cubeMesh = new Mesh(geometry, Materials);
+		this.mesh = cubeMesh;
 	}
 	initFACES() {
 		let x = this.textureSize.x;
 		let y = this.textureSize.y;
 		let z = this.textureSize.z;
-		let position = new Vector3(
-			this.texturePosition[this.model.versionMap[this.versionInde]]
-		);
+		let position = this.texturePosition;
 
 		this.FACES = [
 			new Face('left', z, y, x, position),
@@ -67,46 +64,6 @@ export class Cube {
 			new Face('front', x, y, z, position),
 			new Face('back', x, y, z, position)
 		];
-	}
-	initMesh() {
-		this.geometry = new BoxGeometry(
-			this.boxSize.x,
-			this.boxSize.y,
-			this.boxSize.z,
-			this.textureSize.x,
-			this.textureSize.y,
-			this.textureSize.z
-		);
-		this.geometry.name = this.name + ' geometry';
-		// var a = new MeshBasicMaterial( {color: 0xff0000} );
-		// let a = new MeshBasicMaterial({
-		// 	color: 16777215,
-		// 	vertexColors: FaceColors,
-		// 	side: DoubleSide,
-		// 	overdraw: 1,
-		// 	fog: false,
-		// 	wireframe: false,
-		// 	transparent: true,
-		// 	opacity: 1,
-		// 	visible: true,
-		// });
-		// let b = new MeshBasicMaterial({
-		// 	visible: false,
-		// 	transparent: true,
-		// 	opacity: 0
-		// });
-		this.material = new MultiMaterial(Materials);
-		// console.log(this.material)
-		this.material.materials[0].opacity = this.opacity;
-		this.mesh = new Mesh(
-			this.geometry,
-			this.material
-		);
-		this.mesh.name = this.name + ' cube_in';
-		this.mesh.cube = this;
-		this.mesh.position.subVectors(this.mesh.position, this.center);
-		this.mesh = new Object3D().add(this.mesh);
-		this.mesh.name = this.name + ' cube';
 	}
 
 	draw() {

@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-13 14:21:02 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-18 13:18:16
+ * @Last Modified time: 2017-08-20 01:28:48
  */
 
 import { WebGLRenderer, CanvasRenderer, PCFSoftShadowMap, Scene, PerspectiveCamera, Vector3, Raycaster } from 'three';
@@ -12,30 +12,30 @@ import { Tween } from 'es6-tween';
 
 export class Controller {
 	constructor(renderer, camera, scene) {
-        this.init(renderer, camera, scene);
-		let _this = this;
+        // this.init(renderer, camera, scene);
+		// let _this = this;
 		
-		this.domElement = $(renderer.domElement);
-		// console.log(this.camera)
-		this.controller = new OrbitControls(this.camera, this.domElement[0]);
-		this.controller.target = new Vector3(0, 0, 0);
-		this.controller.zoomSpeed = Math.sqrt(renderer.state.scale);
-		this.controller.userPanSpeed = 0;
-		this.controller.enablePan = false;
-		this.controller.maxDistance = renderer.state.editorSize * renderer.state.scale * renderer.state.scale;
-		this.controller.minDistance = 15;
-		this.controller.minZoom = 0.8;
-		this.controller.maxZoom = 1.5;
-		this.controller.mouseButtons.PAN = 1;
-		this.controller.mouseButtons.ZOOM = 2;
-		this.controller.mouseButtons.ORBIT = 2;
-		this.controller.addEventListener('change', function() {
-			_this.renderer.renderer.render(_this.scene, _this.camera);
-		});
-		renderer.raycaster = new Raycaster();
-		renderer.objects = [];
-		this.initEvent();
-		return this.controller;
+		// this.domElement = $(renderer.domElement);
+		// // console.log(this.camera)
+		// this.controller = new OrbitControls(this.camera, this.domElement[0]);
+		// this.controller.target = new Vector3(0, 0, 0);
+		// this.controller.zoomSpeed = Math.sqrt(renderer.state.scale);
+		// this.controller.userPanSpeed = 0;
+		// this.controller.enablePan = false;
+		// this.controller.maxDistance = renderer.state.editorSize * renderer.state.scale * renderer.state.scale;
+		// this.controller.minDistance = 15;
+		// this.controller.minZoom = 0.8;
+		// this.controller.maxZoom = 1.5;
+		// this.controller.mouseButtons.PAN = 1;
+		// this.controller.mouseButtons.ZOOM = 2;
+		// this.controller.mouseButtons.ORBIT = 2;
+		// this.controller.addEventListener('change', function() {
+		// 	_this.renderer.renderer.render(_this.scene, _this.camera);
+		// });
+		// renderer.raycaster = new Raycaster();
+		// renderer.objects = [];
+		// this.initEvent();
+		// return this.controller;
     }
     init(renderer, camera, scene){
         this.renderer = renderer;

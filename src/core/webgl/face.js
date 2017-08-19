@@ -2,11 +2,11 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-15 13:24:04 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-17 15:19:16
+ * @Last Modified time: 2017-08-20 02:33:01
  */
 import {
 	Vector2
-} from '../apis';
+} from 'three';
 export class Face {
 	constructor(name, width, height, z, texturePosition, mirror) {
 		this.name = name;

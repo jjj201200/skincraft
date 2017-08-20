@@ -1,4 +1,4 @@
-// const express = require('express');
+const express = require('express');
 let path = require('path');
 let webpack = require('webpack');
 let node_modules_dir = path.join(__dirname, 'node_modules');
@@ -8,7 +8,7 @@ let deps = [
 	// 'moment/min/moment.min.js',
 	// 'underscore/underscore-min.js',
 ];
-
+// console.log(path.join(__dirname, 'src', 'static'))
 let config = {
 	entry: [
 		'webpack/hot/only-dev-server',
@@ -24,18 +24,6 @@ let config = {
 	devServer: {
 		inline: true,
 		contentBase: path.resolve(__dirname, 'src'),
-		noInfo: true,
-		// setup(app) {
-		// 	app.use('/statics/models/*', express.static(path.join(__dirname, 'src', 'static', 'models')));
-		// 	app.use('/statics/textures/*', express.static(path.join(__dirname, 'src', 'static', 'textures')));
-		// },
-		// proxy: [
-		// 	{
-		// 		context: ['/models/**', '/textures/**'],
-		// 		target: 'http://127.0.0.1:3000/',
-		// 		secure: false
-		// 	}
-		// ]
 	},
 	resolve: {
 		alias: {

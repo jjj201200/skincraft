@@ -7,7 +7,7 @@
     "start": "electron .",
     "webpack": "webpack",
     "webpack_server": "node ./server.js",
-    "json_server": "json-server db.json"
+    "json_server": "json-server db.json --routes routes.json --static /src/static"
   },
   "repository": "https://github.com/jjj201200/skincraft",
   "keywords": [

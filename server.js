@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-11 22:29:25 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-20 02:45:38
+ * @Last Modified time: 2017-08-20 03:48:53
  */
 
 var webpack = require('webpack');
@@ -16,6 +16,16 @@ new WebpackDevServer(webpack(config), {
   inline: true,
   historyApiFallback: true,
   stats: { colors: true },
+  proxy: [
+    {
+      context: [
+        '/models/*', 
+        '/textures/*'
+      ],
+      target: 'http://127.0.0.1:3000/',
+      secure: false
+    }
+  ],
 }).listen(8080, '127.0.0.1', function (err, result) {
   if (err) {
     console.log(err);

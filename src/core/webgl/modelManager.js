@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-18 12:36:22 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-20 02:11:15
+ * @Last Modified time: 2017-08-20 20:05:06
  */
 
 import $ from 'jquery';
@@ -18,7 +18,6 @@ export class ModelManager {
 		this.modelDataList = {};
 		this.modelObjects = {};
 		this.dtd = null;
-		this.preUrl = 'http://127.0.0.1:3000/';
 	}
 	getModelData(modelName) {
 		let _t = this;
@@ -29,11 +28,11 @@ export class ModelManager {
 		if (modelData) {
 			return _t.dfd.resolve();
 		} else {
-			return $.get('/model/' + modelName).then(
+			return $.get(`/models/${modelName}.json`).then(
 				(result) => {
 					_t.modelDataList[modelName] = result;
 					_t.dfd.resolve();
-					return modelData;
+					return result;
 				},
 				(result) => {
 					_t.dfd.reject(`Failed to get model ${modelName}.`);
@@ -56,12 +55,12 @@ export class ModelManager {
 		} else {
 			return _t.getModelData(modelName).then(
 				(result) => {
-					let modelData = result;
+					let modelData = _t.modelDataList[modelName];
 					let model = new Model(modelName, modelData);
 					_t.modelObjects[modelName] = model;
 					_t.currentModel = model;
 					_t.dfd.resolve();
-					return model;
+					return result;
 				},
 				(result) => {
 					console.error(`Failed to set model ${modelName}.`);

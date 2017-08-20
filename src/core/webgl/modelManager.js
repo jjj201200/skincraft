@@ -2,7 +2,7 @@
  * @Author: jjj201200@gmail.com 
  * @Date: 2017-08-18 12:36:22 
  * @Last Modified by: jjj201200@gmail.com
- * @Last Modified time: 2017-08-20 23:35:29
+ * @Last Modified time: 2017-08-20 23:57:19
  */
 
 import $ from 'jquery';
@@ -29,7 +29,7 @@ export class ModelManager {
 		if (modelData) {
 			return _t.dfd.resolve();
 		} else {
-			let p = $.get("static/models/steve.json",{},()=>{},'text').then(
+			let p = $.get(`/models/${modelName}.json`,{},()=>{},'text').then(
 				(result) => {
 					_t.modelDataList[modelName] = result;
 					_t.dfd.resolve();
